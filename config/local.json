@@ -1,0 +1,10 @@
+{
+    "services": [
+        "https://www.chase.com/",
+        "https://teamfighttactics.leagueoflegends.com/en-us/",
+        "https://github.com/negretenico"
+    ],
+    "server" :{
+        "port": 8080
+    }
+}
