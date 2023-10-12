@@ -1,4 +1,4 @@
-package config
+package models
 
 type ServerConfig struct {
 	Port int `json:"port"`
