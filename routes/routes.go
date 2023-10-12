@@ -11,6 +11,7 @@ import (
 func SetupRoutes(router *gin.Engine) {
 	// Example route for getting albums
 	router.GET("/services", handlers.GetServices)
+	router.GET("/services/:url", handlers.HealthHandler)
 	router.GET("/health", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"status": "ok"})
 	})

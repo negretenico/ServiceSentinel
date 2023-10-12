@@ -2,7 +2,9 @@ package events
 
 import (
 	app "ServiceSentinel/init"
-	"fmt"
+	health "ServiceSentinel/util"
+	"log"
+	"strings"
 	"time"
 )
 
@@ -12,13 +14,20 @@ func OnTime() {
 	for {
 		select {
 		case <-ticker.C:
-			appConfig, err := app.Init()
+			conf, err := app.Init()
 			if err != nil {
-				fmt.Println("Error loading in the config")
 				return
 			}
-			fmt.Printf("Got the app config")
-			fmt.Printf(appConfig.Services[0])
+			hosts := []string{"chase", "teamfight", "git"}
+			myServices := conf.Services
+			for _, endpoint := range myServices {
+				for _, host := range hosts {
+					if strings.Contains(endpoint, host) {
+						healthStatus := health.GetHealth(endpoint)
+						log.Printf("The status for %s  is %s", endpoint, healthStatus)
+					}
+				}
+			}
 		}
 	}
 }
